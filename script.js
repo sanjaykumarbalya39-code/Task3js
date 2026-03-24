@@ -1,419 +1,257 @@
+// Spread & Rest Operator
+// Question-1  
 
-// Section 1: Basic Functions (1–8)
-// Create a function to print "Hello World"
-function sayHello() {
-  console.log("Hello World");
+const arr1 = [10, 20];
+const arr2 = [30, 40];
+
+const merged = [...arr1, ...arr2, 50];
+console.log(merged); 
+
+
+// Question-2
+const original = [1, 2, 3];
+const clone = [...original];
+clone.push(4);
+console.log(original);
+console.log(clone);
+
+//Question-3
+const obj1 = { name: "A", salary: 1000 };
+const obj2 = { salary: 2000 };
+const mergedObj = { ...obj1, ...obj2 };
+console.log(mergedObj);
+
+//Question-4
+function sum(...nums) {
+  return nums.reduce((acc, val) => acc + val, 0);
 }
+console.log(sum(1,2,3,4));
 
-// Create a function that takes a name and prints:
-// Welcome <name>
-
-function welcome(name) {
-  console.log("Welcome " + name);
+//Question-5
+function showRest(a, b, ...rest) {
+  console.log(rest);
 }
+showRest(1,2,3,4,5);
 
-welcome("Sanjay");
 
+// Destructuring
+//Question-6
+const arr = [5,10,15,20];
+const [first, , , last] = arr;
 
-//Create a function to add two numbers and return the result
+console.log(first, last);
 
-function add(a, b) {
-  return a + b;
-}
+//Question-7
+let a = 10, b = 20;
+[a, b] = [b, a];
+console.log(a, b);
+
+//Question-8
+const nested = [1,[2,[3,[4]]]];
+const [, [, [, [value]]]] = nested;
 
-console.log(add(5, 3));
-//Create a function to check whether a number is even or odd
+console.log(value);
 
-function checkEvenOdd(num) {
-  if (num % 2 === 0) {
-    return "Even";
-  } else {
-    return "Odd";
-  }
-}
+//Question-9
+const user = { name: "John", age: 25 };
+const { name: userName, age } = user;
+console.log(userName);
 
-console.log(checkEvenOdd(4));
+//Question-10
+const obj = { name: "John" };
+const { name, age1 = 18 } = obj;
+console.log(age1);
 
-//Create a function to find the square of a number
+// Basic Array Operations
+//Question-11
+let arr3 = [1,2,3,4,5];
+arr3.push(6,7);
+console.log(arr3);
 
-function square(num) {
-  return num * num;
-}
+//Question-12
+let last1 = arr.pop();
+console.log(arr3);
 
-console.log(square(6));
+//Question-13
+let first1 = arr.shift();
+console.log(arr3);
 
-//Create a function to return the largest of three numbers
-function largest(a, b, c) {
-  return Math.max(a, b, c);
-}
+//Question-14
+arr3.unshift(0);
+console.log(arr3);
 
-console.log(largest(10, 25, 15));
+//Question-15
+arr3.splice(2,2);
+console.log(arr3);
 
-//Create a function with a default parameter (age = 18)
+//Slice / Splice / Flat
+//Question-16
+const arr4 = [1000,2000,3000,4000,5000,6000];
+console.log(arr4.slice(3)); 
 
-function showAge(name, age = 18) {
-  console.log(name + " is " + age + " years old");
-}
+//Question-17
+let arr5 = [1,2,3,4];
+arr.splice(1,2,"A","B");
+console.log(arr5);
 
-showAge("Sanjay");
-showAge("Bhanu", 25);
+//Question-18
+const nested1 = [1,[2,[3,[4]]]];
+console.log(nested1.flat(Infinity));
+
+
+//Question-19
+console.log([1,[2,[3]]].flat());
+
+//Question-20
+let arr6 = [1,2,5];
+arr.splice(2,0,3,4);
+console.log(arr6);
 
-//Create a function that returns full name (first name + last name)
+//Searching & Checking
+
+const arr7 = [1,2,3,5,5];
+
+//Question-21
+// includes
+console.log(arr7.includes(100)); 
+
+//Question-22
+// indexOf from position
+console.log(arr7.indexOf(3,2));
+
+//Question-23
+// lastIndexOf
+console.log(arr7.lastIndexOf(5));
+
+//Question-24
+// every
+console.log(arr7.every(n => n > 0));
+
+//Question-25
+// some
+console.log(arr7.some(n => n > 50)); 
+
+
+// Sorting
+// Question-26
+[10,5,100,1].sort((a,b)=>a-b);
+// Question-27
+[10,5,100,1].sort((a,b)=>b-a);
+// Question-28
+const emp = [{salary:300},{salary:100},{salary:200}];
+emp.sort((a,b)=>a.salary-b.salary);
+// Question-29
+let arr8 = [20,36,15,8,63,96,82,99]
+arr8.sort((a,b)=>a-b).reverse();
+// Question-30
+[10,5,100].sort();
+// Because after the second digit, the sort function treats the values as strings rather than numbers.
 
-function fullName(firstName, lastName) {
-  return firstName + " " + lastName;
-}
+//Higher Order Functions
 
-console.log(fullName("Sanjay", "Reddy"));
+//Question-31
 
-// Section 2: Return & Scope (9–14)
-// Create a function that returns the multiplication of three numbers
+[1,2,3].forEach(n => console.log(n));
 
-function multiply(a, b, c) {
-  return a * b * c;
-}
+//Question-32
+const result = [1,2,3].forEach(n => n*2);
+console.log(result); // undefined
 
-console.log(multiply(2, 3, 4)); 
+//Question-33
+[1,2,3].map(n => n*2);
+["a","b"].map(n => n.toUpperCase());
+const emp1 = [{salary:100},{salary:200}];
+emp1.map(e => e.salary);
 
-//Write a function to demonstrate the difference between:
-//var let const
-function scopeDemo() {
-  var x = 10;   // function scoped
-  let y = 20;   // block scoped
-  const z = 30; // block scoped
+//Question-34
+emp1.filter(e => e.salary > 300000);
+[1,2,3,4].filter(n => n % 2 === 0);
+["hello","hi","welcome"].filter(s => s.length > 5);
 
-  console.log(x, y, z);
-}
+//Question-35
+[10,20,60].find(n => n > 50);
+emp1.find(e => e.salary < 200000);
 
-scopeDemo();
+//Reduce
 
-// Key differences:
-// var → can be redeclared, function scoped
-// let → cannot redeclare, block scoped
-// const → cannot redeclare or reassign, block scoped
+//Question-36
+// sum
+[10,20,30].reduce((a,b)=>a+b,0);
 
-//Create a nested function (function inside another function)
-function outer() {
-  let message = "Hello from outer";
+// max
+[10,50,30].reduce((a,b)=>Math.max(a,b));
 
-  function inner() {
-    console.log(message);
-  }
+// count
+[1,2,3].reduce(acc => acc+1, 0);
 
-  inner();
-}
+// array → object
+["a","b"].reduce((acc,val)=>{
+  acc[val]=true;
+  return acc;
+}, {});
 
-outer();
+// total salary
+[10,20,30].reduce((a,b)=>a+b,0);
+//Question-37
+[10,50,30].reduce((a,b)=>Math.max(a,b));
+//Question-38
+[1,2,3].reduce(acc => acc+1, 0);
+//Question-39
+["a","b"].reduce((acc,val)=>{
+  acc[val]=true;
+  return acc;
+}, {});
 
-//Create a global variable and access it inside a function
-function outer() {
-  let message = "Hello from outer";
+//Question-40
+emp1.reduce((sum,e)=>sum+e.salary,0);
 
-  function inner() {
-    console.log(message);
-  }
 
-  inner();
-}
+//Conversion
+//Question-41
+[1,2,3].toString();
+//Question-42
+[1,2,3].join(" - ");
+//Question-43
+[1,2,3].join(" - ");
+//Question-44
+[1,2,3].join(" - ");
+//Question-45
+[1,2,3].join(" - ");
 
-outer();
+//Bonus (Real-World)
+//Question-46
+const cart = [{price:100},{price:200}];
+const total = cart.reduce((sum,item)=>sum+item.price,0);
+products.filter(p => p.price < 500);
 
+//Question-47
+products.filter(p => p.name.includes("phone"));
 
-//Try accessing a block-scoped variable outside the block and observe the result
-// {
-//   let a1 = 50;
-//   console.log("Inside block:", a1);
-// }
+//Question-48
+//[1,2,2,3,3] = [...new Set([1,2,2,3,3])];
 
-// console.log("Outside block:", a); 
+//Question-49
+const grouped = emp.reduce((acc,e)=>{
+  const key = e.salary > 300000 ? "high" : "low";
+  if(!acc[key]) acc[key] = [];
+  acc[key].push(e);
+  return acc;
+}, {});
 
-//It occures reference error. Because it is not defined.
 
 
-// Section 3: Function Types (15–20)
-// Convert a normal function into an anonymous function
-const greet = function () {
-  console.log("Hello!");
-};
 
-greet();
 
-//Convert a normal function into an arrow function
-function add(a, b) {
-  return a + b;
-}
-//Create an arrow function with single-line return
 
-const multiply1 = (a, b) => a * b;
 
-console.log(multiply1(3, 4)); 
 
-//Create a function expression and call it
-const sayHi = function () {
-  console.log("Hi there!");
-};
 
-sayHi();
 
-//Compare normal function vs arrow function using this
 
-const obj = {
-  name: "SANJAY",
 
-  normalFunc: function () {
-    console.log("Normal:", this.name);
-  },
 
-  arrowFunc: () => {
-    console.log("Arrow:", this.name);
-  }
-};
 
-obj.normalFunc();
-obj.arrowFunc();  
 
-//Create an IIFE (Immediately Invoked Function Expression) to print:
 
-(function () {
-  console.log("Executed immediately");
-})();
 
 
-// Section 4: Callback & Higher Order Functions (21–25)
-// Create a function that accepts another function as an argument and executes it
-
-function greet1(name) {
-  console.log("Hello " + name);
-}
-
-function processUser(callback) {
-  callback("Sanjay");
-}
-processUser(greet1);
-
-// Build a calculator using callback functions (add, sub, mul)
-function add(a, b) {
-  return a + b;
-}
-
-function sub(a, b) {
-  return a - b;
-}
-
-function mul(a, b) {
-  return a * b;
-}
-
-function calculator(a, b, operation) {
-  return operation(a, b);
-}
-
-console.log(calculator(5, 3, add));
-console.log(calculator(5, 3, sub));
-console.log(calculator(5, 3, mul));
-
-// Pass a function as an argument and print a custom message
-function message() {
-  console.log("This is a custom message");
-}
-
-function execute(fn) {
-  console.log("Executing function...");
-  fn();
-}
-
-execute(message);
-
-// Create a function that delays execution using a callback (simulate setTimeout)
-function delayExecution(callback, delay) {
-  setTimeout(() => {
-    callback();
-  }, delay);
-}
-
-delayExecution(() => {
-  console.log("Executed after 2 seconds");
-}, 2000);
-
-// Create a custom map function using callback
-function customMap(array, callback) {
-  const result = [];
-
-  for (let i = 0; i < array.length; i++) {
-    result.push(callback(array[i], i, array));
-  }
-
-  return result;
-}
-const numbers = [1, 2, 3, 4];
-
-const squared = customMap(numbers, (num) => num * num);
-
-console.log(squared);
-
-
-
-// Section 5: Currying (26–28)
-// Convert a function:
-// add(a, b, c)
-// into currying format:
-// add(a)(b)(c)
-function add(a) {
-  return function(b) {
-    return function(c) {
-      return a + b + c;
-    };
-  };
-}
-console.log(add(2)(3)(4)); 
-
-// Create a multiply function using currying
-function multiply2(a) {
-  return function(b) {
-    return function(c) {
-      return a * b * c;
-    };
-  };
-}
-console.log(multiply2(2)(3)(5)); 
-
-// Create a greeting function using currying
-function greet2(greeting) {
-  return function(name) {
-    return greeting + ", " + name + "!";
-  };
-}
-const sayHelloo = greet2("Hello");
-
-console.log(sayHelloo("Sanjay")); 
-console.log(greet("Welcome")("User")); 
-
-    
-// Section 6: Generator Function (29–31)
-// Create a generator function that yields 3 messages
-function* messageGenerator() {
-  yield "Discount 40%";
-  yield "min 15% profit";
-  yield "Try again";
-}
-
-const gen = messageGenerator();
-
-console.log(gen.next().value);
-console.log(gen.next().value);
-console.log(gen.next().value);
-
-// Iterate a generator using for...of
-function* messageGenerator() {
-  yield "Hello";
-  yield "Welcome";
-  yield "Goodbye";
-}
-
-const gen1 = messageGenerator();
-
-console.log(gen1.next().value);
-console.log(gen1.next().value);
-console.log(gen1.next().value);
-
-// Create an infinite generator that produces numbers (1, 2, 3...)
-
-function* numberss() {
-  yield 1;
-  yield 2;
-  yield 3;
-}
-
-for (let num of numberss()) {
-  console.log(num);
-}
-
-// Section 7: Spread Operator (32–34)
-// Merge two arrays using spread operator
-const arr1 = [1, 2, 3];
-const arr2 = [4, 5, 6];
-
-const merged = [...arr1, ...arr2];
-console.log(merged);
-// Clone an object and modify one property
-const arr11 = [1, 2, 3];
-const arr22 = [4, 5, 6];
-
-const merged1 = [...arr11, ...arr22];
-console.log(merged1);
-// Merge multiple arrays and add extra values using spread
-const a5 = [1, 2];
-const b2 = [3, 4];
-
-const result = [...a5, ...b2, 5, 6];
-console.log(result);
-
-// Section 8: Rest Operator (35–37)
-// Create a function that accepts unlimited arguments and returns the sum
-function sum(...numbers) {
-  return numbers.reduce((total, num) => total + num, 0);
-}
-
-console.log(sum(1, 2, 3, 4));
-// Store extra arguments using rest operator and print them
-function showArgs(first, ...rest) {
-  console.log("First:", first);
-  console.log("Others:", rest);
-}
-
-showArgs(10, 20, 30, 40);
-// Create a function to find the maximum value using rest operator
-
-const a1 = [1, 2];
-const b1 = [3, 4];
-
-const result1 = [...a, ...b, 5, 6];
-console.log(result1);
-
-// Section 9: Switch Case (38–40)
-// Create a switch case to print day name (1–7)
-let day = 3;
-
-switch (day) {
-  case 1: console.log("Sunday"); break;
-  case 2: console.log("Monday"); break;
-  case 3: console.log("Tuesday"); break;
-  case 4: console.log("Wednesday"); break;
-  case 5: console.log("Thursday"); break;
-  case 6: console.log("Friday"); break;
-  case 7: console.log("Saturday"); break;
-  default: console.log("Invalid day");
-}
-// Create a calculator using switch case (+, -, *, /)
-let num1 = 10;
-let num2 = 5;
-let operator = "+";
-
-switch (operator) {
-  case "+": console.log(num1 + num2); break;
-  case "-": console.log(num1 - num2); break;
-  case "*": console.log(num1 * num2); break;
-  case "/": console.log(num1 / num2); break;
-  default: console.log("Invalid operator");
-}
-// Create a grade system using switch or conditions:
-// 90+ → A
-// 75+ → B
-// 50+ → C
-// Below 50 → Fail
-
-let marks = 82;
-
-switch (true) {
-  case (marks >= 90):
-    console.log("Grade A");
-    break;
-  case (marks >= 75):
-    console.log("Grade B");
-    break;
-  case (marks >= 50):
-    console.log("Grade C");
-    break;
-  default:
-    console.log("Fail");
-}
